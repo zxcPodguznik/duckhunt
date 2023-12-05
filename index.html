@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.duck_parameters{
+			height: 100px;
+			width: 100px;
+			position: absolute;
+			background-size: 100% 100%;
+		}
+		.shtora1{
+			background-image: url("1s.png");
+			height:900px;
+			width: 250px;
+			background-size: 100% 100%;
+			position: absolute;
+		}
+		.shtora2{
+			background-image: url("2s.png");
+			height:900px;
+			width: 250px;
+			background-size: 100% 100%;
+			left:1600px;
+			position: absolute;
+		}
+		.wave1{
+			background-image: url("wave1.png");
+			height:300px;
+			width: 1650px;
+			background-size: 100% 100%;
+			position: absolute;
+			left:100px;
+			top:80px;
+		}
+		.wave2{
+			background-image: url("wave2.png");
+			height:300px;
+			width: 1650px;
+			background-size: 100% 100%;
+			position: absolute;
+			left:100px;
+			top:360px;
+		}
+		.wave3{
+			background-image: url("wave3.png");
+			height:300px;
+			width: 1650px;
+			background-size: 100% 100%;
+			position: absolute;
+			left:100px;
+			top:600px;
+		}
+		.button{
+			position: absolute;
+			height: 70px;
+			width: 140px;
+			background: red;
+			border-radius: 100px;
+			left: 850px;
+		}
+		.scoreStyle{
+			position: absolute;
+			top:10px;
+			left:850px;
+			display: none;
+		}
+		
+	</style>
+</head>
+<body>
+	<button class="button">PLAY GAME</button>
+	<h1 class="scoreStyle "> score <span class="score ">0</span>/30</h1>
+	<div class="wave1"></div>
+	<div class="wave2"></div>
+	<div class="wave3"></div>
+	<div class="shtora1"></div>
+	<div class="shtora2"></div>
+	
+	
+	
+	
+
+	<script type="text/javascript">
+		let scoreStyle = document.querySelector(".scoreStyle")
+		let button = document.querySelector(".button")
+		let y = [200,400,600]
+		let tip_utki = ["good","bad"]
+		let point = 0
+		let score = document.querySelector(".score")
+		let crateduck = function() {
+		let duck = document.createElement("div")
+		document.body.appendChild(duck)
+		duck.classList.add("duck_parameters")
+		x = Math.round(Math.random()*1500+100)
+		qy = Math.round(Math.random()*2)
+		duck.style.left = x + "px"
+		duck.style.top = y[qy] + "px"
+
+		let type_index = Math.round(Math.random())
+		duck.mtype = tip_utki[type_index]
+
+		duck.onclick = function(){
+			
+			if(duck.mtype == "good"){   
+			point = point + 1
+			score.innerHTML = point
+			
+			}
+			if(duck.mtype == "bad"){
+			point = point - 1
+			score.innerHTML = point
+			
+			}
+			duck.style.display = "none"
+		}
+		if(duck.mtype == "good") {
+			duck.style.backgroundImage = "url(1.png)"
+
+		}
+		if(duck.mtype == "bad") {
+			duck.style.backgroundImage = "url(2.png)"
+		}
+		}
+
+		
+		
+		button.onclick = function(){
+			interval1 = setInterval(crateduck,250)
+			setTimeout(endGame,15000)
+			button.style.display = "none"
+			scoreStyle.style.display = "block"
+		}
+		let endGame = function() {
+			clearInterval(interval1)
+			if(point<=20){
+				alert("YOU LOSE")
+			}
+			else {
+				alert("YOU WIN")
+			}
+		}
+
+
+	</script>
+	
+</body>
+</html>
